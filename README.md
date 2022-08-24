@@ -1,0 +1,2 @@
+# ZTM-go-course
+Exercises 
