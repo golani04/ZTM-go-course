@@ -18,5 +18,26 @@ import "fmt"
 
 type Part string
 
+func printInfo(title string, slice []Part) {
+	fmt.Println()
+	fmt.Println("---", title, "---")
+
+	for i := 0; i < len(slice); i++ {
+		part := slice[i]
+		fmt.Println(part)
+	}
+}
+
 func main() {
+	parts := make([]Part, 3)
+
+	parts = []Part{"CPU", "Case", "Motherboard"}
+	printInfo("Parts 1", parts)
+
+	parts = append(parts, "CPU Fan", "RAM")
+	printInfo("Parts 2", parts)
+
+	parts = parts[3:]
+	printInfo("Parts 3", parts)
+
 }
