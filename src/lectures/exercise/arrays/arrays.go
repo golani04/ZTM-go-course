@@ -23,19 +23,26 @@ type Product struct {
 	price float32
 }
 
-func totalCost(products [4]Product) float32 {
+func totalCost(products [4]Product) (float32, int) {
 	var sum float32
+	var totalItems int
 	for i := 0; i < len(products); i++ {
-		sum += products[i].price
+		product := products[i]
+
+		if product.name != "" {
+			sum += product.price
+			totalItems += 1
+		}
 	}
 
-	return sum
+	return sum, totalItems
 }
 
 func printInfo(products [4]Product) {
-	fmt.Println(products[3])
-	fmt.Println(len(products))
-	fmt.Println(totalCost(products))
+	cost, totalItems := totalCost(products)
+	fmt.Println(products[totalItems-1])
+	fmt.Println(totalItems)
+	fmt.Println(cost)
 }
 
 func main() {
