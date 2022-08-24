@@ -40,9 +40,9 @@ func totalCost(products [4]Product) (float32, int) {
 
 func printInfo(products [4]Product) {
 	cost, totalItems := totalCost(products)
-	fmt.Println(products[totalItems-1])
-	fmt.Println(totalItems)
-	fmt.Println(cost)
+	fmt.Println("Last item is", products[totalItems-1])
+	fmt.Println("Total items", totalItems)
+	fmt.Println("Total cost", cost)
 }
 
 func main() {
