@@ -17,7 +17,9 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 const (
 	Online      = 0
@@ -26,6 +28,43 @@ const (
 	Retired     = 3
 )
 
+func printServerInfo(servers map[string]int) {
+	fmt.Println("--- Server Statuses --")
+	fmt.Println("Number of servers", len(servers))
+
+	stats := make(map[int]int)
+	for _, status := range servers {
+		if status > Retired {
+			panic("unhandled server status")
+		}
+		stats[status] += 1
+	}
+
+	fmt.Println(stats[Online], "servers are online")
+	fmt.Println(stats[Offline], "servers are offline")
+	fmt.Println(stats[Maintenance], "servers are undergoing maintenance")
+	fmt.Println(stats[Retired], "servers are retired")
+	fmt.Println()
+}
+
 func main() {
 	servers := []string{"darkstar", "aiur", "omicron", "w359", "baseline"}
+	serverStatuses := make(map[string]int)
+	for _, server := range servers {
+		serverStatuses[server] = Online
+	}
+
+	printServerInfo(serverStatuses)
+
+	serverStatuses["darkstar"] = Retired
+	serverStatuses["aiur"] = Offline
+
+	printServerInfo(serverStatuses)
+
+	for server := range serverStatuses {
+		serverStatuses[server] = Maintenance
+	}
+
+	printServerInfo(serverStatuses)
+
 }
